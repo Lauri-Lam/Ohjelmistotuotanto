@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "XXOE3CZpAgQ=",
+  "dgSpecHash": "3TIyIXEL93c=",
   "success": true,
-  "projectFilePath": "C:\\Users\\allu\\Source\\Repos\\Ohjelmistotuotanto\\MokkivarausApp\\MokkivarausApp.csproj",
+  "projectFilePath": "C:\\Users\\allu\\source\\repos\\Ohjelmistotuotanto\\MokkivarausApp\\MokkivarausApp.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\allu\\.nuget\\packages\\bouncycastle.cryptography\\2.5.1\\bouncycastle.cryptography.2.5.1.nupkg.sha512",
     "C:\\Users\\allu\\.nuget\\packages\\google.protobuf\\3.30.0\\google.protobuf.3.30.0.nupkg.sha512",

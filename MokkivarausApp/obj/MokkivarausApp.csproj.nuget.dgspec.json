@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\allu\\Source\\Repos\\Ohjelmistotuotanto\\MokkivarausApp\\MokkivarausApp.csproj": {}
+    "C:\\Users\\allu\\source\\repos\\Ohjelmistotuotanto\\MokkivarausApp\\MokkivarausApp.csproj": {}
   },
   "projects": {
-    "C:\\Users\\allu\\Source\\Repos\\Ohjelmistotuotanto\\MokkivarausApp\\MokkivarausApp.csproj": {
+    "C:\\Users\\allu\\source\\repos\\Ohjelmistotuotanto\\MokkivarausApp\\MokkivarausApp.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\allu\\Source\\Repos\\Ohjelmistotuotanto\\MokkivarausApp\\MokkivarausApp.csproj",
+        "projectUniqueName": "C:\\Users\\allu\\source\\repos\\Ohjelmistotuotanto\\MokkivarausApp\\MokkivarausApp.csproj",
         "projectName": "MokkivarausApp",
-        "projectPath": "C:\\Users\\allu\\Source\\Repos\\Ohjelmistotuotanto\\MokkivarausApp\\MokkivarausApp.csproj",
+        "projectPath": "C:\\Users\\allu\\source\\repos\\Ohjelmistotuotanto\\MokkivarausApp\\MokkivarausApp.csproj",
         "packagesPath": "C:\\Users\\allu\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\allu\\Source\\Repos\\Ohjelmistotuotanto\\MokkivarausApp\\obj\\",
+        "outputPath": "C:\\Users\\allu\\source\\repos\\Ohjelmistotuotanto\\MokkivarausApp\\obj\\",
         "projectStyle": "PackageReference",
         "crossTargeting": true,
         "fallbackFolders": [

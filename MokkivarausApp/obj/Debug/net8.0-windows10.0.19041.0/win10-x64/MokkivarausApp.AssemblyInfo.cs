@@ -18,15 +18,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("MokkivarausApp")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-<<<<<<< HEAD
-<<<<<<< HEAD
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0+725f4db375b94660ddea10b2b687de677db25a11")]
-=======
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0+25abd00e23e62553cc4aeef3479c5f1e6971baf8")]
->>>>>>> rebase mainin kanssa että voi tehdä pull requestin
-=======
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0+662e5be20003a4cfb210170c367c30eac3eb1b23")]
->>>>>>> jotain
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0+51ebee8702f73c63d3b5d5533d558ce4c7ca78ca")]
 [assembly: System.Reflection.AssemblyProductAttribute("MokkivarausApp")]
 [assembly: System.Reflection.AssemblyTitleAttribute("MokkivarausApp")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

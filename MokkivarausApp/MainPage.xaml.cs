@@ -1,25 +1,29 @@
 ﻿namespace MokkivarausApp
 {
+    using MokkivarausApp.Data;
+    using System;
+    using System.Data;
+    using System.Diagnostics;
+    using System.Threading.Tasks;
+
     public partial class MainPage : ContentPage
     {
-        int count = 0;
+        DatabaseService dbS = new DatabaseService();
 
         public MainPage()
         {
             InitializeComponent();
+            LoadData();
         }
 
-        private void OnCounterClicked(object sender, EventArgs e)
+        private async void LoadData()
         {
-            count++;
+            DataTable dt = await dbS.GetDataAsync("SELECT * FROM alue");
 
-            if (count == 1)
-                CounterBtn.Text = $"Clicked {count} time";
-            else
-                CounterBtn.Text = $"Clicked {count} times";
-
-            SemanticScreenReader.Announce(CounterBtn.Text);
+            foreach (DataRow row in dt.Rows)
+            {
+                Trace.WriteLine(row["nimi"]);
+            }
         }
     }
-
 }

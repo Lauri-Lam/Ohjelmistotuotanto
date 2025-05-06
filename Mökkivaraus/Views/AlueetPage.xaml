@@ -12,7 +12,7 @@
           <SwipeView>
             <SwipeView.RightItems>
               <SwipeItems>
-                <SwipeItem Text="Poista"
+                <SwipeItem Text="Poista!"
                            BackgroundColor="Red"
                            Command="{Binding Source={RelativeSource AncestorType={x:Type viewModels:AlueetViewModel}}, Path=DeleteCommand}"
                            CommandParameter="{Binding .}" />

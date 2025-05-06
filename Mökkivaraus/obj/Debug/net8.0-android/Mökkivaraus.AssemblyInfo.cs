@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("Mökkivaraus")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0+58ffd8268d8500c6a63e9143038b6b1c9a0d188b")]
 [assembly: System.Reflection.AssemblyProductAttribute("Mökkivaraus")]
 [assembly: System.Reflection.AssemblyTitleAttribute("Mökkivaraus")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

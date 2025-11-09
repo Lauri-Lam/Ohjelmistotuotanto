@@ -23,6 +23,7 @@
             foreach (DataRow row in dt.Rows)
             {
                 Trace.WriteLine(row["nimi"]);
+                Trace.WriteLine(row["alue_id"]);
             }
         }
     }

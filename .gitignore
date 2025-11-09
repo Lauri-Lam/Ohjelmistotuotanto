@@ -3,16 +3,3 @@
 ################################################################################
 
 .vs/
-/MokkivarausApp/obj/Debug
-/MokkivarausApp/obj/Debug/net8.0-ios
-/MokkivarausApp/obj/Debug/net8.0-ios/.NETCoreApp,Version=v8.0.AssemblyAttributes.cs
-/MokkivarausApp/obj/Debug/net8.0-ios/MokkivarausApp.AssemblyInfo.cs
-/MokkivarausApp/obj/Debug/net8.0-ios/MokkivarausApp.AssemblyInfoInputs.cache
-/MokkivarausApp/obj/Debug/net8.0-ios/MokkivarausApp.GeneratedMSBuildEditorConfig.editorconfig
-/MokkivarausApp/obj/Debug/net8.0-ios/MokkivarausApp.GlobalUsings.g.cs
-/MokkivarausApp/obj/Debug/net8.0-maccatalyst
-/MokkivarausApp/obj/Debug/net8.0-maccatalyst/.NETCoreApp,Version=v8.0.AssemblyAttributes.cs
-/MokkivarausApp/obj/Debug/net8.0-maccatalyst/MokkivarausApp.AssemblyInfo.cs
-/MokkivarausApp/obj/Debug/net8.0-maccatalyst/MokkivarausApp.AssemblyInfoInputs.cache
-/MokkivarausApp/obj/Debug/net8.0-maccatalyst/MokkivarausApp.GeneratedMSBuildEditorConfig.editorconfig
-/MokkivarausApp/obj/Debug/net8.0-maccatalyst/MokkivarausApp.GlobalUsings.g.cs

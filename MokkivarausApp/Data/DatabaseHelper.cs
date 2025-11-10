@@ -1,6 +1,7 @@
 ﻿using MySql.Data.MySqlClient;
 using System;
 using System.Data;
+using System.Diagnostics;
 using System.Threading.Tasks;
 
 namespace MokkivarausApp.Data
@@ -26,14 +27,39 @@ namespace MokkivarausApp.Data
                             dt.Load(reader);
                         }
                     }
+
+                    await conn.CloseAsync();
                 }
             }
             catch (Exception ex)
             {
                 Console.WriteLine("Database Error: " + ex.Message);
+                Trace.WriteLine("Database Error: " + ex.Message);
             }
 
             return dt;
+        }
+
+        public async void DatabaseNonQuery(MySqlCommand cmd)
+        {
+            try
+            {
+                using (MySqlConnection connection = new MySqlConnection(connectionString))
+                {
+                    await connection.OpenAsync();
+
+                    cmd.Connection = connection;
+
+                    await cmd.ExecuteNonQueryAsync();
+
+                    await connection.CloseAsync();
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Database Error: " + ex.Message);
+                Trace.WriteLine("Database Error: " + ex.Message);
+            }
         }
     }
 }

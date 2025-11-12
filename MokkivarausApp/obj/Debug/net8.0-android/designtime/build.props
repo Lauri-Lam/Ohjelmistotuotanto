@@ -24,7 +24,11 @@ androidgeneratejnimarshalmethods=false
 os=windows_nt
 androidincludedebugsymbols=true
 androidpackagenamingpolicy=lowercasecrc64
+<<<<<<< Updated upstream
 _nugetassetsfilehash=a7541449731187a756fba1afe9c2bd5dc35eff2b24a9fae2361dc6103aaa42bf
+=======
+_nugetassetsfilehash=2117bec914b8ddf722a7b23ec1c51376c99c8f57f0af05994d1580f8c8cd5487
+>>>>>>> Stashed changes
 typemapkind=strings-asm
 androidmanifestplaceholders=
 projectfullpath=c:\users\drago\source\repos\ohjelmistotuotanto\mokkivarausapp\mokkivarausapp.csproj

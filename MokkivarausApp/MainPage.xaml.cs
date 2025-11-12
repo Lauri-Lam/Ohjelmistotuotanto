@@ -1,5 +1,8 @@
-﻿namespace MokkivarausApp
+﻿namespace MokkivarausApp;
+
+public partial class MainPage : ContentPage
 {
+<<<<<<< Updated upstream
     using MokkivarausApp.Data;
     using System;
     using System.Data;
@@ -25,5 +28,10 @@
                 Trace.WriteLine(row["nimi"]);
             }
         }
+=======
+    public MainPage()
+    {
+        InitializeComponent();
+>>>>>>> Stashed changes
     }
 }

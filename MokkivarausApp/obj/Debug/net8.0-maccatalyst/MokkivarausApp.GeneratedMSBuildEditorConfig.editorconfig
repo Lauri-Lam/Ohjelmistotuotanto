@@ -43,3 +43,39 @@ build_metadata.AdditionalFiles.GenKind = Xaml
 build_metadata.AdditionalFiles.ManifestResourceName = MokkivarausApp.Resources.Styles.Styles.xaml
 build_metadata.AdditionalFiles.TargetPath = Resources\Styles\Styles.xaml
 build_metadata.AdditionalFiles.RelativePath = Resources\Styles\Styles.xaml
+
+[C:/Users/drago/Source/Repos/Ohjelmistotuotanto/MokkivarausApp/Views/AdminCabinsPage.xaml]
+build_metadata.AdditionalFiles.GenKind = Xaml
+build_metadata.AdditionalFiles.ManifestResourceName = MokkivarausApp.Views.AdminCabinsPage.xaml
+build_metadata.AdditionalFiles.TargetPath = Views\AdminCabinsPage.xaml
+build_metadata.AdditionalFiles.RelativePath = Views\AdminCabinsPage.xaml
+
+[C:/Users/drago/Source/Repos/Ohjelmistotuotanto/MokkivarausApp/Views/CabinEditPage.xaml]
+build_metadata.AdditionalFiles.GenKind = Xaml
+build_metadata.AdditionalFiles.ManifestResourceName = MokkivarausApp.Views.CabinEditPage.xaml
+build_metadata.AdditionalFiles.TargetPath = Views\CabinEditPage.xaml
+build_metadata.AdditionalFiles.RelativePath = Views\CabinEditPage.xaml
+
+[C:/Users/drago/Source/Repos/Ohjelmistotuotanto/MokkivarausApp/Views/CalendarPage.xaml]
+build_metadata.AdditionalFiles.GenKind = Xaml
+build_metadata.AdditionalFiles.ManifestResourceName = MokkivarausApp.Views.CalendarPage.xaml
+build_metadata.AdditionalFiles.TargetPath = Views\CalendarPage.xaml
+build_metadata.AdditionalFiles.RelativePath = Views\CalendarPage.xaml
+
+[C:/Users/drago/Source/Repos/Ohjelmistotuotanto/MokkivarausApp/Views/LoginPage.xaml]
+build_metadata.AdditionalFiles.GenKind = Xaml
+build_metadata.AdditionalFiles.ManifestResourceName = MokkivarausApp.Views.LoginPage.xaml
+build_metadata.AdditionalFiles.TargetPath = Views\LoginPage.xaml
+build_metadata.AdditionalFiles.RelativePath = Views\LoginPage.xaml
+
+[C:/Users/drago/Source/Repos/Ohjelmistotuotanto/MokkivarausApp/Views/ReservationEditPage.xaml]
+build_metadata.AdditionalFiles.GenKind = Xaml
+build_metadata.AdditionalFiles.ManifestResourceName = MokkivarausApp.Views.ReservationEditPage.xaml
+build_metadata.AdditionalFiles.TargetPath = Views\ReservationEditPage.xaml
+build_metadata.AdditionalFiles.RelativePath = Views\ReservationEditPage.xaml
+
+[C:/Users/drago/Source/Repos/Ohjelmistotuotanto/MokkivarausApp/Views/ReservationPage.xaml]
+build_metadata.AdditionalFiles.GenKind = Xaml
+build_metadata.AdditionalFiles.ManifestResourceName = MokkivarausApp.Views.ReservationPage.xaml
+build_metadata.AdditionalFiles.TargetPath = Views\ReservationPage.xaml
+build_metadata.AdditionalFiles.RelativePath = Views\ReservationPage.xaml

@@ -1,29 +1,23 @@
 ﻿namespace MokkivarausApp
 {
-    using MokkivarausApp.Data;
     using System;
     using System.Data;
     using System.Diagnostics;
-    using System.Threading.Tasks;
+    using MokkivarausApp.Data;
 
     public partial class MainPage : ContentPage
     {
-        DatabaseService dbS = new DatabaseService();
+        DatabaseService databaseService = new DatabaseService();
 
         public MainPage()
         {
             InitializeComponent();
-            LoadData();
+            ConnectionCheck();
         }
 
-        private async void LoadData()
+        private async void ConnectionCheck()
         {
-            DataTable dt = await dbS.GetDataAsync("SELECT * FROM alue");
-
-            foreach (DataRow row in dt.Rows)
-            {
-                Trace.WriteLine(row["nimi"]);
-            }
+            foreach (string tableName in await databaseService.GetTableNames()) Trace.WriteLine(tableName);
         }
     }
 }

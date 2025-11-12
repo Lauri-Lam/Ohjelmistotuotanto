@@ -38442,24 +38442,24 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\drago\\.nuget\\packages\\": {},
+    "C:\\Users\\allu\\.nuget\\packages\\": {},
     "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\drago\\Source\\Repos\\Ohjelmistotuotanto\\MokkivarausApp\\MokkivarausApp.csproj",
+      "projectUniqueName": "C:\\Users\\allu\\Source\\Repos\\Ohjelmistotuotanto\\MokkivarausApp\\MokkivarausApp.csproj",
       "projectName": "MokkivarausApp",
-      "projectPath": "C:\\Users\\drago\\Source\\Repos\\Ohjelmistotuotanto\\MokkivarausApp\\MokkivarausApp.csproj",
-      "packagesPath": "C:\\Users\\drago\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\drago\\Source\\Repos\\Ohjelmistotuotanto\\MokkivarausApp\\obj\\",
+      "projectPath": "C:\\Users\\allu\\Source\\Repos\\Ohjelmistotuotanto\\MokkivarausApp\\MokkivarausApp.csproj",
+      "packagesPath": "C:\\Users\\allu\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\allu\\Source\\Repos\\Ohjelmistotuotanto\\MokkivarausApp\\obj\\",
       "projectStyle": "PackageReference",
       "crossTargeting": true,
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
       ],
       "configFilePaths": [
-        "C:\\Users\\drago\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\allu\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],

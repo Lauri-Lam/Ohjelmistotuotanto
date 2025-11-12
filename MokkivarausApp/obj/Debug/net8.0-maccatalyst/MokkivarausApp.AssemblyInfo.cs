@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("MokkivarausApp")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+6b65f023bc23dc4e3d9e27084e227a343b99efd6")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+72562f4589018bb213765480d622e61611279f70")]
 [assembly: System.Reflection.AssemblyProductAttribute("MokkivarausApp")]
 [assembly: System.Reflection.AssemblyTitleAttribute("MokkivarausApp")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

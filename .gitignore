@@ -1,5 +1,66 @@
-﻿################################################################################
-# This .gitignore file was automatically created by Microsoft(R) Visual Studio.
-################################################################################
-
+﻿# Visual Studio
 .vs/
+*.user
+*.userosscache
+*.suo
+
+# Build results
+bin/
+obj/
+build/
+[Bb]uild/
+[Bb]uilds/
+
+# MAUI / .NET
+*.dll
+*.exe
+*.pdb
+*.mdb
+*.cache
+*.log
+*.tmp
+*.nuget.props
+*.nuget.g.props
+
+# Maui image cache
+**/Resources/Raw/
+**/Resources/**/bin/
+**/Resources/**/obj/
+
+# Platforms build folders
+MokkivarausApp/Platforms/**/bin/
+MokkivarausApp/Platforms/**/obj/
+
+# Xamarin/Maui intermediate
+**/intermediates/
+**/drawable/
+**/layout/
+**/values/
+
+# Android (MAUI)
+*.apk
+*.aab
+*.keystore
+.android/
+.gradle/
+local.properties
+
+# iOS (MAUI)
+*.ipa
+*.dSYM/
+**/.mfractor/
+*.plist
+*.xcworkspace/
+*.xcodeproj/
+*.xcassets/
+
+# Windows (MAUI)
+**/*.appx
+**/*.appxbundle
+**/*.msix
+**/*.msixbundle
+*.appxsym
+*.pfx
+
+# Ignore all zip’d resources
+**/*.zip

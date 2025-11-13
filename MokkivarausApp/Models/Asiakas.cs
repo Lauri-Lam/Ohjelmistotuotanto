@@ -13,5 +13,18 @@
         public string FullName => $"{Etunimi} {Sukunimi}".Trim();
 
         public override string ToString() => FullName;
+
+        public bool Empty()
+        {
+            return (
+                this.AsiakasId == 0 &&
+                this.Etunimi == null &&
+                this.Sukunimi == null &&
+                this.Postinro == null &&
+                this.Lahiosoite == null &&
+                this.Email == null &&
+                this.Puhelinnro == null
+            );
+        }
     }
 }

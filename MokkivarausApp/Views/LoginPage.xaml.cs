@@ -1,3 +1,5 @@
+using Microsoft.UI.Xaml.Media.Animation;
+using MokkivarausApp.Data;
 using MokkivarausApp.Models;
 using MokkivarausApp.Services;
 
@@ -5,7 +7,7 @@ namespace MokkivarausApp;
 
 public partial class LoginPage : ContentPage
 {
-    private readonly DataService _dataService = new();
+    private DatabaseService databaseService = new();
 
     public LoginPage()
     {
@@ -24,7 +26,7 @@ public partial class LoginPage : ContentPage
 
         try
         {
-            Asiakas asiakas = await _dataService.GetOrCreateAsiakasByNameAsync(name);
+            Asiakas asiakas = await databaseService.GetOrCreateCustomerByName(name);
             App.CurrentAsiakasId = asiakas.AsiakasId;
 
             Application.Current!.MainPage = new AppShell();

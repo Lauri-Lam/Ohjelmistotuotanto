@@ -2,6 +2,7 @@
 using System.Data;
 using System.Diagnostics;
 using MySql.Data.MySqlClient;
+using MokkivarausApp.Models;
 
 namespace MokkivarausApp.Data
 {
@@ -17,7 +18,7 @@ namespace MokkivarausApp.Data
 
                 List<string> columns = await GetTableColumns(table);
 
-                if(table != "varauksen_palvelut" && table != "posti") columns.RemoveAt(0);
+                if (table != "varauksen_palvelut" && table != "posti") columns.RemoveAt(0);
 
                 if (columns.Count != values.Count) throw new Exception("Different amount of Columns and Values");
 
@@ -34,6 +35,108 @@ namespace MokkivarausApp.Data
                 Console.WriteLine(ex.Message);
                 Trace.WriteLine(ex.Message);
             }
+        }
+        public async void AddData(string table, List<string> values, List<string> columns)
+        {
+            try
+            {
+                if (!(await GetTableNames()).Exists(x => x == table)) throw new Exception("The database does not contain a table with the specified name");
+
+                string columnString = string.Join(", ", columns);
+                string valueString = string.Join("', '", values);
+                string sqlQuery = "INSERT INTO " + table + " (" + columnString + ") VALUES ('" + valueString + "');";
+
+                MySqlCommand cmd = new MySqlCommand(sqlQuery);
+
+                DatabaseNonQuery(cmd);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                Trace.WriteLine(ex.Message);
+            }
+        }
+
+        public async Task<Asiakas> GetOrCreateCustomerByName(string name)
+        {
+            Asiakas customer = await GetCustomerByNameAsync(name);
+            if (customer.Empty()) return CreateCustomer(name);
+            return customer;
+        }
+
+        public Asiakas CreateCustomer(string name)
+        {
+            Asiakas customer = new Asiakas();
+
+            try
+            {
+                string[] cleanName = name.Trim().Split(' ', 2, StringSplitOptions.RemoveEmptyEntries);
+
+                customer.Postinro = "00000";
+                customer.Etunimi = cleanName[0];
+                customer.Sukunimi = cleanName[1];
+
+                AddData("asiakas",
+                    new List<string> { customer.Postinro, customer.Etunimi, customer.Sukunimi },
+                    new List<string> { "postinro, etunimi, sukunimi" }
+                );
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Database Error: " + ex.Message);
+                Trace.WriteLine("Database Error: " + ex.Message);
+            }
+
+            return customer;
+        }
+
+        /*
+        public async Task<Asiakas> CreateCustomer(List<string> values)
+        {
+
+        }
+
+        public async Task<Asiakas> CreateCustomer(List<Asiakas> customer)
+        {
+
+        }
+        */
+
+        public async Task<Asiakas> GetCustomerByNameAsync(string name)
+        {
+            Asiakas newCustomer = new Asiakas();
+
+            try
+            {
+                string[] cleanName = name.Trim().Split(' ', 2, StringSplitOptions.RemoveEmptyEntries);
+                string sqlQuery = "SELECT * FROM asiakas WHERE etunimi = @Etunimi AND sukunimi = @Sukunimi LIMIT 1";
+
+                MySqlCommand cmd = new MySqlCommand(sqlQuery);
+
+                cmd.Parameters.AddWithValue("@Etunimi", cleanName[0]);
+                cmd.Parameters.AddWithValue("@Sukunimi", cleanName[1]);
+
+                DataTable dt = await GetDataAsync(cmd);
+
+                if (dt.Rows.Count < 1) return newCustomer;
+
+                DataRow dr = dt.Rows[0];
+
+                newCustomer.AsiakasId = Convert.ToUInt32(dr["asiakas_id"]);
+                newCustomer.Postinro = dr["postinro"].ToString();
+                newCustomer.Etunimi = dr["etunimi"].ToString();
+                newCustomer.Sukunimi = dr["sukunimi"].ToString();
+                newCustomer.Lahiosoite = dr["lahiosoite"].ToString();
+                newCustomer.Email = dr["email"].ToString();
+                newCustomer.Puhelinnro = dr["puhelinnro"].ToString();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Database Error: " + ex.Message);
+                Trace.WriteLine("Database Error: " + ex.Message);
+            }
+
+            return newCustomer;
         }
 
         public async Task<List<string>> GetTableColumns(string tableName)

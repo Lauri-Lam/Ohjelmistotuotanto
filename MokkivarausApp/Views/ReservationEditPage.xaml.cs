@@ -119,7 +119,7 @@ public partial class ReservationEditPage : ContentPage
 
         try
         {
-            await _dataService.DeleteReservationAsync(_reservation.VarausId);
+            await databaseService.DeleteReservationAsync(_reservation.VarausId);
             await Shell.Current.GoToAsync("..");
         }
         catch (Exception ex)

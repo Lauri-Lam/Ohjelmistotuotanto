@@ -155,6 +155,22 @@ namespace MokkivarausApp.Data
             }
         }
 
+        public async Task DeleteDataAsync(string table, string id)
+        {
+            try
+            {
+                string? idColumn = await GetTableFirstColumnAsync(table) ?? throw new Exception("The first column of the table could not be found");
+                string sqlQuery = $"DELETE FROM {table} WHERE {idColumn} = {id};";
+
+                DatabaseNonQuery(sqlQuery);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                Trace.WriteLine(ex.Message);
+            }
+        }
+
         public async Task<Asiakas> GetOrCreateCustomerByName(string name)
         {
             Asiakas customer = await GetCustomerByNameAsync(name);
@@ -209,6 +225,32 @@ namespace MokkivarausApp.Data
                     new List<string> { cabinID.ToString(), reservationStart.ToString(dateTimeFormat), reservationEnd.ToString(dateTimeFormat) },
                     new List<string> { "mokki_id", "varattu_alkupvm", "varattu_loppupvm" }
                     );
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Database Error: " + ex.Message);
+                Trace.WriteLine("Database Error: " + ex.Message);
+            }
+        }
+
+        public async Task DeleteReservationAsync(string id)
+        {
+            try
+            {
+                await DeleteDataAsync("varaus", id);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Database Error: " + ex.Message);
+                Trace.WriteLine("Database Error: " + ex.Message);
+            }
+        }
+
+        public async Task DeleteReservationAsync(uint id)
+        {
+            try
+            {
+                await DeleteDataAsync("varaus", id.ToString());
             }
             catch (Exception ex)
             {
@@ -474,6 +516,29 @@ namespace MokkivarausApp.Data
                     cmd.Connection = connection;
 
                     await cmd.ExecuteNonQueryAsync();
+
+                    await connection.CloseAsync();
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Database Error: " + ex.Message);
+                Trace.WriteLine("Database Error: " + ex.Message);
+            }
+        }
+
+        public async void DatabaseNonQuery(string sql)
+        {
+            try
+            {
+                using (MySqlConnection connection = new MySqlConnection(connectionString))
+                {
+                    await connection.OpenAsync();
+
+                    using (MySqlCommand cmd = new(sql, connection))
+                    {
+                        await cmd.ExecuteNonQueryAsync();
+                    }
 
                     await connection.CloseAsync();
                 }

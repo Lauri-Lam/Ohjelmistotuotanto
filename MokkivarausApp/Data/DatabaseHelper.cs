@@ -36,6 +36,7 @@ namespace MokkivarausApp.Data
                 Trace.WriteLine(ex.Message);
             }
         }
+
         public async void AddData(string table, List<string> values, List<string> columns)
         {
             try
@@ -101,6 +102,51 @@ namespace MokkivarausApp.Data
 
         }
         */
+
+        public async Task<List<Varaus>> GetReservationsByCustomerIDAsync(uint customerID)
+        {
+            List<Varaus> reservations = [];
+
+            try
+            {
+                string sqlQuery = @"SELECT varaus.*, mokki.mokkinimi, CONCAT(asiakas.etunimi, ' ', asiakas.sukunimi) AS asiakasnimi
+                                    FROM ((varaus
+                                    INNER JOIN mokki ON varaus.mokki_id = mokki.mokki_id)
+                                    INNER JOIN asiakas ON varaus.asiakas_id = asiakas.asiakas_id)
+                                    WHERE asiakas.asiakas_id = @CustomerID
+                                    ORDER BY varaus.varattu_alkupvm;";
+
+                MySqlCommand cmd = new MySqlCommand(sqlQuery);
+
+                cmd.Parameters.AddWithValue("@CustomerID", customerID);
+
+                DataTable dt = await GetDataAsync(cmd);
+
+                foreach (DataRow row in dt.Rows)
+                {
+                    Varaus newReservation = new();
+
+                    newReservation.VarausId = Convert.ToUInt32(row["varaus_id"]);
+                    newReservation.AsiakasId = Convert.ToUInt32(row["asiakas_id"]);
+                    newReservation.MokkiId = Convert.ToUInt32(row["mokki_id"]);
+                    newReservation.VarattuPvm = Convert.ToDateTime(row["varattu_pvm"]);
+                    newReservation.VahvistusPvm = Convert.ToDateTime(row["vahvistus_pvm"]);
+                    newReservation.VarattuAlkuPvm = Convert.ToDateTime(row["varattu_alkupvm"]);
+                    newReservation.VarattuLoppuPvm = Convert.ToDateTime(row["varattu_loppupvm"]);
+                    newReservation.MokkiNimi = row["mokkinimi"].ToString();
+                    newReservation.AsiakasNimi = row["asiakasnimi"].ToString();
+
+                    reservations.Add(newReservation);
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Database Error: " + ex.Message);
+                Trace.WriteLine("Database Error: " + ex.Message);
+            }
+
+            return reservations;
+        }
 
         public async Task<Asiakas> GetCustomerByNameAsync(string name)
         {

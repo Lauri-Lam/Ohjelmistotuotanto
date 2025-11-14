@@ -1,3 +1,4 @@
+using MokkivarausApp.Data;
 using MokkivarausApp.Models;
 using MokkivarausApp.Services;
 
@@ -5,7 +6,7 @@ namespace MokkivarausApp;
 
 public partial class ReservationPage : ContentPage
 {
-    private readonly DataService _dataService = new();
+    private DatabaseService databaseService = new();
 
     public ReservationPage()
     {
@@ -23,8 +24,7 @@ public partial class ReservationPage : ContentPage
         if (App.CurrentAsiakasId == 0)
             return;
 
-        var reservations = await _dataService
-            .GetReservationsForCustomerAsync(App.CurrentAsiakasId);
+        var reservations = await databaseService.GetReservationsByCustomerIDAsync(App.CurrentAsiakasId);
 
         ReservationList.ItemsSource = reservations;
     }

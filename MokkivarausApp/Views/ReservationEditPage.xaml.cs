@@ -7,7 +7,6 @@ namespace MokkivarausApp;
 [QueryProperty(nameof(Reservation), "Reservation")]
 public partial class ReservationEditPage : ContentPage
 {
-    private readonly DataService _dataService = new();
     private DatabaseService databaseService = new();
     private List<Mokki> _cabins = new();
     private Varaus _reservation;

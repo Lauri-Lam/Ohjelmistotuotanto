@@ -1,3 +1,4 @@
+using MokkivarausApp.Data;
 using MokkivarausApp.Models;
 using MokkivarausApp.Services;
 
@@ -7,6 +8,7 @@ namespace MokkivarausApp;
 public partial class ReservationEditPage : ContentPage
 {
     private readonly DataService _dataService = new();
+    private DatabaseService databaseService = new();
     private List<Mokki> _cabins = new();
     private Varaus _reservation;
 
@@ -33,7 +35,7 @@ public partial class ReservationEditPage : ContentPage
 
     private async Task LoadCabinsAsync()
     {
-        _cabins = await _dataService.GetAllMokitAsync();
+        _cabins = await databaseService.GetAllCabinsAsync();
         CabinPicker.ItemsSource = _cabins;
         CabinPicker.ItemDisplayBinding = new Binding(nameof(Mokki.Mokkinimi));
 
@@ -80,7 +82,7 @@ public partial class ReservationEditPage : ContentPage
         {
             if (_reservation == null)
             {
-                await _dataService.CreateReservationAsync(
+                await databaseService.CreateReservationAsync(
                     App.CurrentAsiakasId,
                     selectedCabin.MokkiId,
                     start,
@@ -88,7 +90,7 @@ public partial class ReservationEditPage : ContentPage
             }
             else
             {
-                await _dataService.UpdateReservationAsync(
+                await databaseService.UpdateReservationAsync(
                     _reservation.VarausId,
                     selectedCabin.MokkiId,
                     start,

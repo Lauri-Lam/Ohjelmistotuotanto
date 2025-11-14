@@ -9,8 +9,9 @@ namespace MokkivarausApp.Data
     public class DatabaseService
     {
         private string connectionString = "server=127.0.0.1;port=3307;database=vn;user=root;password=Ruutti;";
+        private const string dateTimeFormat = "yyyy-MM-dd HH:mm:ss";
 
-        public async void AddData(string table, List<string> values)
+        public async Task AddData(string table, List<string> values)
         {
             try
             {
@@ -37,7 +38,7 @@ namespace MokkivarausApp.Data
             }
         }
 
-        public async void AddData(string table, List<string> values, List<string> columns)
+        public async Task AddData(string table, List<string> values, List<string> columns)
         {
             try
             {
@@ -58,14 +59,123 @@ namespace MokkivarausApp.Data
             }
         }
 
+        public async Task UpdateDataAsync(string table, string id, List<string> values)
+        {
+            try
+            {
+                if (!(await GetTableNames()).Exists(x => x == table)) throw new Exception("The database does not contain a table with the specified name");
+
+                List<string> columns = await GetTableColumns(table);
+                string idColumn = columns[0];
+
+                if (table != "varauksen_palvelut" && table != "posti") columns.RemoveAt(0);
+                else throw new Exception("These tables do not contain an ID so this method cant be used");
+
+                if (columns.Count != values.Count) throw new Exception("Different amount of Columns and Values");
+
+                List<string> columnValuePairs = [];
+
+                for (int i = 0; i < columns.Count; i++)
+                {
+                    columnValuePairs.Add($"{columns[i]} = '{values[i]}'" + ((i == columns.Count - 1) ? "" : ", "));
+                }
+
+                string sqlQuery = $"UPDATE {table} SET {string.Concat(columnValuePairs)} WHERE {idColumn} = {id}";
+
+                MySqlCommand cmd = new MySqlCommand(sqlQuery);
+
+                DatabaseNonQuery(cmd);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                Trace.WriteLine(ex.Message);
+            }
+        }
+
+        public async Task UpdateDataAsync(string table, string id, List<string> values, List<string> columns)
+        {
+            try
+            {
+                if (!(await GetTableNames()).Exists(x => x == table)) throw new Exception("The database does not contain a table with the specified name");
+
+                if (columns.Count != values.Count) throw new Exception("Different amount of Columns and Values");
+
+                string? idColumn = await GetTableFirstColumnAsync(table) ?? throw new Exception("The first column of the table could not be found");
+
+                List<string> columnValuePairs = [];
+
+                for (int i = 0; i < columns.Count; i++)
+                {
+                    columnValuePairs.Add($"{columns[i]} = '{values[i]}'" + ((i == columns.Count - 1) ? "" : ", "));
+                }
+
+                string sqlQuery = $"UPDATE {table} SET {string.Concat(columnValuePairs)} WHERE {idColumn} = {id}";
+
+                MySqlCommand cmd = new MySqlCommand(sqlQuery);
+
+                DatabaseNonQuery(cmd);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                Trace.WriteLine(ex.Message);
+            }
+        }
+
+        public async Task UpdateDataAsync(string table, List<string> values)
+        {
+            try
+            {
+                if (!(await GetTableNames()).Exists(x => x == table)) throw new Exception("The database does not contain a table with the specified name");
+
+                List<string> columns = await GetTableColumns(table);
+
+                if (columns.Count != values.Count) throw new Exception("Different amount of Columns and Values");
+
+                string? idColumn = await GetTableFirstColumnAsync(table) ?? throw new Exception("The first column of the table could not be found");
+
+                List<string> columnValuePairs = [];
+
+                for (int i = 0; i < columns.Count; i++)
+                {
+                    columnValuePairs.Add($"{columns[i]} = '{values[i]}'" + ((i == columns.Count - 1) ? "" : ", "));
+                }
+
+                string sqlQuery = $"UPDATE {table} SET {string.Concat(columnValuePairs)}";
+
+                MySqlCommand cmd = new MySqlCommand(sqlQuery);
+
+                DatabaseNonQuery(cmd);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                Trace.WriteLine(ex.Message);
+            }
+        }
+
         public async Task<Asiakas> GetOrCreateCustomerByName(string name)
         {
             Asiakas customer = await GetCustomerByNameAsync(name);
-            if (customer.Empty()) return CreateCustomer(name);
+            if (customer.Empty()) return await CreateCustomerAsync(name);
             return customer;
         }
 
-        public Asiakas CreateCustomer(string name)
+        public async Task CreateReservationAsync(uint customerID, uint cabinID, DateTime reservationStart, DateTime reservationEnd)
+        {
+            try
+            {
+                await AddData("varaus", new List<string> { customerID.ToString(), cabinID.ToString(), DateTime.Now.ToString(dateTimeFormat), DateTime.Now.ToString(dateTimeFormat), reservationStart.ToString(dateTimeFormat), reservationEnd.ToString(dateTimeFormat) });
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Database Error: " + ex.Message);
+                Trace.WriteLine("Database Error: " + ex.Message);
+            }
+        }
+
+        public async Task<Asiakas> CreateCustomerAsync(string name)
         {
             Asiakas customer = new Asiakas();
 
@@ -77,7 +187,7 @@ namespace MokkivarausApp.Data
                 customer.Etunimi = cleanName[0];
                 customer.Sukunimi = cleanName[1];
 
-                AddData("asiakas",
+                await AddData("asiakas",
                     new List<string> { customer.Postinro, customer.Etunimi, customer.Sukunimi },
                     new List<string> { "postinro, etunimi, sukunimi" }
                 );
@@ -91,17 +201,58 @@ namespace MokkivarausApp.Data
             return customer;
         }
 
-        /*
-        public async Task<Asiakas> CreateCustomer(List<string> values)
+        public async Task UpdateReservationAsync(uint reservationID, uint cabinID, DateTime reservationStart, DateTime reservationEnd)
         {
-
+            try
+            {
+                await UpdateDataAsync("varaus", reservationID.ToString(),
+                    new List<string> { cabinID.ToString(), reservationStart.ToString(dateTimeFormat), reservationEnd.ToString(dateTimeFormat) },
+                    new List<string> { "mokki_id", "varattu_alkupvm", "varattu_loppupvm" }
+                    );
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Database Error: " + ex.Message);
+                Trace.WriteLine("Database Error: " + ex.Message);
+            }
         }
 
-        public async Task<Asiakas> CreateCustomer(List<Asiakas> customer)
+        public async Task<List<Mokki>> GetAllCabinsAsync()
         {
+            List<Mokki> cabins = [];
 
+            try
+            {
+                string sqlQuery = "SELECT * FROM mokki";
+
+                DataTable dt = await GetDataAsync(sqlQuery);
+
+                foreach (DataRow row in dt.Rows)
+                {
+                    Mokki newCabin = new();
+
+                    newCabin.MokkiId = Convert.ToUInt32(row["mokki_id"]);
+                    newCabin.AlueId = Convert.ToUInt32(row["alue_id"]);
+                    newCabin.Postinro = row["postinro"].ToString();
+                    newCabin.Mokkinimi = row["mokkinimi"].ToString();
+                    newCabin.Katuosoite = row["katuosoite"].ToString();
+                    newCabin.Hinta = Convert.ToDouble(row["hinta"]);
+                    newCabin.Kuvaus = row["kuvaus"].ToString();
+                    newCabin.Varustelu = row["varustelu"].ToString();
+
+                    if (!Convert.IsDBNull(row["henkilomaara"])) newCabin.Henkilomaara = Convert.ToInt32(row["henkilomaara"]);
+
+                    cabins.Add(newCabin);
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Database Error: " + ex.Message);
+                Trace.WriteLine("Database Error: " + ex.Message);
+            }
+
+            return cabins;
         }
-        */
 
         public async Task<List<Varaus>> GetReservationsByCustomerIDAsync(uint customerID)
         {
@@ -207,6 +358,27 @@ namespace MokkivarausApp.Data
             }
 
             return tableColumns;
+        }
+
+        public async Task<string?> GetTableFirstColumnAsync(string tableName)
+        {
+            string? tableColumn = null;
+
+            try
+            {
+                string sqlQuery = "SHOW COLUMNS FROM " + tableName + ";";
+
+                DataTable dt = await GetDataAsync(sqlQuery);
+
+                tableColumn = dt.Rows[0]["Field"].ToString();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Database Error: " + ex.Message);
+                Trace.WriteLine("Database Error: " + ex.Message);
+            }
+
+            return tableColumn;
         }
 
         public async Task<List<string>> GetTableNames()

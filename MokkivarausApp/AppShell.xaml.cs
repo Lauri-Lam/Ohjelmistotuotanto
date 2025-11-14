@@ -1,10 +1,12 @@
-﻿namespace MokkivarausApp
+﻿namespace MokkivarausApp;
+
+public partial class AppShell : Shell
 {
-    public partial class AppShell : Shell
+    public AppShell()
     {
-        public AppShell()
-        {
-            InitializeComponent();
-        }
+        InitializeComponent();
+
+        Routing.RegisterRoute(nameof(ReservationEditPage), typeof(ReservationEditPage));
+        Routing.RegisterRoute(nameof(CabinEditPage), typeof(CabinEditPage));
     }
 }

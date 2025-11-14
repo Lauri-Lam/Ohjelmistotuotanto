@@ -3,13 +3,26 @@
     x:Class="MokkivarausApp.AppShell"
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    xmlns:local="clr-namespace:MokkivarausApp"
-    Shell.FlyoutBehavior="Disabled"
-    Title="MokkivarausApp">
+    xmlns:local="clr-namespace:MokkivarausApp">
 
-    <ShellContent
-        Title="Home"
-        ContentTemplate="{DataTemplate local:MainPage}"
-        Route="MainPage" />
+    <TabBar>
+        <Tab Title="Reservations">
+            <ShellContent
+                Title="Reservations"
+                ContentTemplate="{DataTemplate local:ReservationPage}" />
+        </Tab>
+
+        <Tab Title="Calendar">
+            <ShellContent
+                Title="Calendar"
+                ContentTemplate="{DataTemplate local:CalendarPage}" />
+        </Tab>
+
+        <Tab Title="Admin">
+            <ShellContent
+                Title="Cabins"
+                ContentTemplate="{DataTemplate local:AdminCabinsPage}" />
+        </Tab>
+    </TabBar>
 
 </Shell>
